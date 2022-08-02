@@ -1,0 +1,41 @@
+//****TABLE CUSTOMER****//
+
+CREATE TABLE Customer ( 
+    Customer_id VARCHAR2(20) CONSTRAINT pk_customer PRIMARY KEY,
+    Customer_Name VARCHAR2(20) NOT NULL,
+    Customer_Tel NUMBER
+    );
+
+//TABLE PRODUCT****//
+
+CREATE TABLE Product (
+    Product_id VARCHAR2(20) CONSTRAINT pk_product PRIMARY KEY, 
+    Product_Name VARCHAR2(20) NOT NULL, 
+    Price NUMBER CHECK (Price > 0)
+    );
+
+//****TABLE ORDERS****//
+
+CREATE TABLE orders
+( quantity NUMBER,
+  total_amount NUMBER,
+  customer_id VARCHAR2(20),
+  product_id VARCHAR2(20),
+  CONSTRAINT fk_customers
+    FOREIGN KEY (customer_id)
+    REFERENCES customers(id),
+  CONSTRAINT fk_products
+    FOREIGN KEY (product_id)
+    REFERENCES products(id)
+);
+
+//****Add a column Category (VARCHAR2(20)) to the PRODUCT table****//
+
+
+ALTER TABLE products ADD category VARCHAR2(20);
+
+
+//****Add a column OrderDate (DATE)  to the ORDERS table which have SYSDATE as a default value****//
+
+
+ALTER TABLE orders ADD order_date DATE DEFAULT SYSDATE;
